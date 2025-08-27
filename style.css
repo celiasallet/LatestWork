@@ -1,0 +1,112 @@
+body {
+  font-family: sans-serif;
+   margin: 0;
+   background: #f2f2f2;
+max-width: calc(100vw - 2rem);
+overflow: hidden;
+
+}
+
+h1 {
+  text-align: center;
+  margin-top: 50px;
+}
+
+p {
+  text-align: center;
+  margin-bottom:60px;
+}
+
+h4{
+  text-align:center; 
+  line-height:80px;
+  font-weight:normal;
+
+}
+
+.masonry {
+  position: relative;
+     width: calc(100% - 2rem);
+    padding: 1rem;
+}
+
+.item {
+  position: absolute;
+  transition: transform 0.3s ease;
+  will-change: transform; /* aide le GPU */
+}
+
+.item img {
+  border-radius: 0.5rem;
+  width: 100%;
+  height: auto;
+  display: block;
+  cursor: pointer;
+  transition: transform 0.3s ease; /* unifié */
+  will-change: transform;
+}
+
+.item img:hover {
+  transform: scale(1.05);
+}
+
+.item img:focus-visible {
+  transform: scale(1.05);
+}
+
+.item.active img {
+  width: 200%;
+}
+
+.item.active {
+  grid-column: span 2;
+  grid-row: span 2;
+}
+
+#overlay {
+  position: fixed;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  opacity: 0;
+  pointer-events: none;
+  background: rgba(255,255,255,0);
+  transition: opacity 0.4s ease, background 0.4s ease;
+  will-change: opacity, background;
+}
+
+#overlay img {
+  max-width: 92%;
+  max-height: 92%;
+  object-fit: contain;
+  border-radius: 0;
+  transform: scale(0);
+  transition: transform 0.4s ease-in-out; 
+  will-change: transform;
+  box-shadow: 0 8px 30px rgba(0,0,0,0.25);
+}
+
+#overlay.show {
+  background: rgba(255,255,255,0.95);
+  opacity: 1;
+  pointer-events: auto;
+}
+
+#overlay.show img {
+  transform: scale(1);
+  transition-delay: 0.25s; /* délai pour que le fond apparaisse avant */
+}
+
+#overlay.show::after {
+  content: "✕";
+  position: absolute;
+  top: 20px;
+  right: 20px;
+  font-size: 24px;
+  color: rgba(0,0,0,0.7);
+  cursor: pointer;
+  user-select: none;
+}
+
